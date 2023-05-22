@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Vérifier si l'utilisateur a des droits sudo
+if [ $(id -u) -ne 0 ] && ! sudo -n true 2>/dev/null; then
+  echo "Vous devez avoir des droits sudo pour exécuter ce script."
+  exit 1
+fi
+
+# Supprime la chaine POSTROUTING
+iptables –F
+
+# Désactiver le pont réseau
+#ip link set dev Alphonse down
+
+# Supprime le bridge Alphonse
+ip link delete dev Alphonse
